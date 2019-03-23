@@ -1,0 +1,85 @@
+version: "2"
+services:
+  server:
+    build: ./server
+    ports:
+      - "8081:3005"
+    depends_on:
+      - auth
+      - messaging
+      - networking
+    networks:
+      - services_network
+  auth:
+    build: ./services/auth
+    ports:
+      - "6000:6000"
+    depends_on:
+      - mongo
+    networks:
+      - services_network
+      - db_network
+  messaging:
+    build: ./services/messaging
+    ports:
+      - "8083:3000"
+    depends_on:
+      - mongo
+    networks:
+      - services_network
+      - db_network
+  networking:
+    build: ./services/networking
+    ports:
+      - "8084:3000"
+    depends_on:
+      - mongo
+    networks:
+      - services_network
+      - db_network
+  api:
+    build: ./services/api
+    ports:
+      - "8085:3000"
+    depends_on:
+      - mongo
+    networks:
+      - services_network
+      - db_network
+  notification:
+    build: ./services/notification
+    ports:
+      - "8086:3000"
+    depends_on:
+      - mongo
+    networks:
+      - services_network
+      - db_network
+  storage:
+    build: ./services/storage
+    ports:
+      - "8087:3000"
+    depends_on:
+      - mongo
+    networks:
+      - services_network
+      - db_network
+  redis:
+    container_name: redis-service
+    image: 'redis:4.0.11'
+    networks:
+      - services_network
+      - db_network
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-volume:/data/db
+volumes:
+  data-volume:
+networks:
+  db_network:
+    driver: bridge
+  services_network:
+    driver: bridge

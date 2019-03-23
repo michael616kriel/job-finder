@@ -1,0 +1,21 @@
+{
+  "name": "server-container",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-server": "cd server && npm run prestart:prod",
+    "build-client": "cd client && npm run build",
+    "build-auth": "cd services/auth && npm run prestart:prod",
+    "build-messaging": "cd services/messaging && npm run prestart:prod",
+    "build-networking": "cd services/networking && npm run prestart:prod",
+    "build": "concurrently \"npm:build-*\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
