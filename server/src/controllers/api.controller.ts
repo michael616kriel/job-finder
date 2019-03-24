@@ -1,14 +1,34 @@
-import { Controller, Get, Inject, Post, Req } from '@nestjs/common';
+import { Controller, Get, Inject, Post, Req, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import * as formidable from 'formidable'
 import { ClientProxy } from '@nestjs/microservices';
 import { Observable } from 'rxjs'
 
+
 @Controller()
 export class ApiController {
-    constructor(@Inject('API_SERVICE') private readonly client: ClientProxy) { }
+    constructor(
+        @Inject('API_SERVICE') private readonly client: ClientProxy,
+        @Inject('STORAGE_SERVICE') private readonly storage: ClientProxy) { }
 
     @Get('/')
     root(): string {
         return 'Welcome to Auth';
+    }
+
+    @Post('/upload/profile')
+    @UseInterceptors(FilesInterceptor('profile'))
+    async uploadProfile(@Req() req, @UploadedFiles() files): Promise<any> {
+        const pattern = { cmd: 'upload-profile' };
+        const payload = { profile: files[0] };
+        return this.storage.send<any>(pattern, payload);
+    }
+
+    @Post('/upload/banner')
+    uploadBanner(@Req() req): Observable<any> {
+        const pattern = { cmd: 'upload-banner' };
+        const payload = req.body;
+        return this.storage.send<any>(pattern, payload);
     }
 
     @Get('/employer/get')

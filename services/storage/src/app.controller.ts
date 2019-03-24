@@ -7,9 +7,14 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-  @MessagePattern({ cmd: 'message' })
-  message(text: string): string {
-    console.log('got messagt', text)
-    return text;
+  @MessagePattern({ cmd: 'upload-profile' })
+  uploadProfile(payload: any): string {
+    return this.appService.uploadProfile(payload);
   }
+
+  @MessagePattern({ cmd: 'upload-banner' })
+  uploadBanner(payload: any): string {
+    return this.appService.uploadBanner(payload);
+  }
+
 }

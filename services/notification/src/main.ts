@@ -6,6 +6,9 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.TCP,
+    options: {
+      port: 6002
+    }
   });
   app.listen(() => console.log('Microservice is listening'));
 }

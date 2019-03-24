@@ -1,0 +1,77 @@
+<style>
+    @-webkit-keyframes shake {
+        from {
+            -webkit-transform-origin: center center;
+            -webkit-transform: rotate(10deg) translate(-50%, -50%);
+        }
+
+        to {
+            -webkit-transform-origin: center center;
+            -webkit-transform: rotate(-10deg) translate(-50%, -50%);
+        }
+
+    }
+
+    button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 25px;
+        font-size: 25px;
+    }
+
+    .container {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+
+
+    .middle-finger {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        transition: 1s ease-in-out all;
+        -webkit-animation: shake 0.3s ease-in-out 0.3s infinite alternate;
+        background-image: url(https://lh3.googleusercontent.com/TUTmemn9KzG9rlwe7naJ1-M4dY73pdn05S25DHXkwVfmPb2kOLPr3EepJhD4UkomlOe-=w720-h310);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .middle-finger.show {
+        width: 300px;
+        height: 300px;
+    }
+</style>
+
+
+<div class="container" ng-app="nice" ng-controller="cool">
+    <div class="middle-finger" ng-class="{ 'show' : show }"></div>
+    <button ng-click="showClick()" ng-if="!show">CLICK ME!</button>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.js"></script>
+<script>
+
+    var app = angular.module('nice', [])
+
+    app.controller('cool', function ($scope) {
+        $scope.show = false
+        $scope.showClick = function () {
+            $scope.show = true
+        }
+    })
+
+</script>

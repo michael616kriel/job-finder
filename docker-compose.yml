@@ -3,11 +3,10 @@ services:
   server:
     build: ./server
     ports:
-      - "8081:3005"
+      - "8080:3005"
     depends_on:
       - auth
       - messaging
-      - networking
     networks:
       - services_network
   auth:
@@ -22,7 +21,7 @@ services:
   messaging:
     build: ./services/messaging
     ports:
-      - "8083:3000"
+      - "5000:5000"
     depends_on:
       - mongo
     networks:
@@ -31,7 +30,7 @@ services:
   api:
     build: ./services/api
     ports:
-      - "8085:3000"
+      - "6001:6001"
     depends_on:
       - mongo
     networks:
@@ -40,7 +39,7 @@ services:
   notification:
     build: ./services/notification
     ports:
-      - "8086:3000"
+      - "6002:6002"
     depends_on:
       - mongo
     networks:
@@ -49,24 +48,23 @@ services:
   storage:
     build: ./services/storage
     ports:
-      - "8087:3000"
+      - "6003:6003"
     depends_on:
       - mongo
     networks:
       - services_network
       - db_network
-  redis:
-    container_name: redis-service
-    image: 'redis:4.0.11'
-    networks:
-      - services_network
-      - db_network
   mongo:
     image: mongo
+    restart: always
+    container_name: mongo
     ports:
       - "27017:27017"
+    command: mongod --noauth --smallfiles
     volumes:
       - data-volume:/data/db
+    networks:
+      - db_network
 volumes:
   data-volume:
 networks:

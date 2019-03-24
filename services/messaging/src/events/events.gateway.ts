@@ -1,5 +1,9 @@
 import { SubscribeMessage, WebSocketGateway, WsResponse, WebSocketServer } from '@nestjs/websockets';
 import { Observable, of } from 'rxjs';
+
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+
 import { map } from 'rxjs/operators'
 const l = console.log
 
@@ -7,30 +11,59 @@ const l = console.log
 export class EventsGateway {
   @WebSocketServer() server;
 
-  @SubscribeMessage('events')
-  onEvent(client: any, payload: any): Observable<WsResponse<any>> | any {
-    // this.server.emit('resmsg', data);  // io.emit('resmsg', payload)
-    let { name } = payload;
-    if (name === 'ajanuw') {
-      return of({
-        event: 'events',
-        data: {
-          msg: 'hello ajanuw!'
-        }
+  constructor(
+    @InjectModel('Chat') private readonly chatModel: Model<any>,
+  ) {
+
+  }
+
+  @SubscribeMessage('message')
+  async onMessage(client: any, payload: any): Promise<any> {
+    console.log(payload)
+
+    let message = {
+      timestamp: new Date(),
+      owner: payload.uid,
+      message: payload.message,
+    }
+
+    const chat = await this.chatModel.findOneAndUpdate({ uids: { $all: [payload.contactID, payload.uid] } }, { $push: { messages: message } })
+    const updatedChat = await this.chatModel.findOne({ uids: { $all: [payload.contactID, payload.uid] } })
+    client.emit('receive-message', updatedChat)
+
+    return of(payload);
+  }
+
+  @SubscribeMessage('select-contact')
+  async selectContact(client: any, payload: any): Promise<any> {
+    console.log(payload)
+
+    const chat = await this.chatModel.findOne({ uids: { $all: [payload.contactID, payload.uid] } })
+    if (!chat) {
+      const newChat = this.chatModel({
+        uids: [payload.contactID, payload.uid],
+      })
+      await newChat.save()
+      client.emit('contact-change', {
+        messages: [],
+      })
+    } else {
+      client.emit('contact-change', {
+        messages: chat.messages,
       })
     }
-    if (name === 'alone') {
-      return of('hi', '实打实')
-        .pipe(
-          map($_ =>
-            ({
-              event: 'events', data: {
-                msg: $_
-              }
-            }))
-        );
-    }
+
     return of(payload);
+  }
+
+  @SubscribeMessage('connection')
+  onConnect(client: any, payload: any): void {
+    console.log('someone connected')
+  }
+
+  @SubscribeMessage('disconnect')
+  onDisconnect(client: any, payload: any): void {
+    console.log('someone disconnected')
   }
 
 }

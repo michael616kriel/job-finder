@@ -14,7 +14,7 @@ import FriendRequestSchema from './schemas/FriendRequest.schema'
 import EmployerSchema from './schemas/Employer.schema'
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/joblist'),
+    MongooseModule.forRoot('mongodb://localhost:27017/joblist', { useNewUrlParser: true }),
     MongooseModule.forFeature([{ name: 'Job', schema: JobSchema }]),
     MongooseModule.forFeature([{ name: 'Applicant', schema: ApplicantSchema }]),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),

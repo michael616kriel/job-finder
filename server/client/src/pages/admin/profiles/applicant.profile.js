@@ -234,7 +234,7 @@ class ApplicantProfile extends Component {
     }
 
     fileUpload(file, type) {
-        const url = 'http://localhost:3001/upload/' + type;
+        const url = `${Config.apiUrl}/upload/` + type;
         const formData = new FormData();
         formData.append(type, file)
         formData.append('uid', this.context.user.uid)

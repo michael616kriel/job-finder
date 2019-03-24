@@ -23,18 +23,18 @@ export class AppService {
 
   async login(payload: Login): Promise<any> {
 
-    const user = await this.userModel.find({ username: payload.username }).exec()
+    const user = await this.userModel.findOne({ username: { $eq: payload.username } }).exec()
 
     console.log(user)
 
-    if (!user[0]) {
+    if (!user) {
       return { message: 'Something is not right' }
     }
     // req.login(user, { session: false }, (err) => {
     //   if (err) {
     //     res.send(err)
     //   }
-    let userData = user[0]
+    let userData = user
     const userObject = {
       username: userData.username,
       uid: userData._id,

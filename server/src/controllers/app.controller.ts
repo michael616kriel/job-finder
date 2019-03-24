@@ -9,7 +9,7 @@ export class AppController {
 
   @Get('/')
   getHome(@Res() res): Observable<string> {
-    return res.sendFile(path.join(__dirname, '/../client/build/index.html'));
+    return res.sendFile(path.join(__dirname, '/../../client/build/index.html'));
   }
 
 }
