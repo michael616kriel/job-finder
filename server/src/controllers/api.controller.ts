@@ -11,6 +11,27 @@ export class ApiController {
         return 'Welcome to Auth';
     }
 
+    @Get('/employer/get')
+    getEmployer(@Req() req): Observable<any> {
+        const pattern = { cmd: 'employer-get' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
+    @Get('/employer/update')
+    updateEmployer(@Req() req): Observable<any> {
+        const pattern = { cmd: 'employer-update' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
+    @Get('/employer/delete')
+    deleteEmployer(@Req() req): Observable<any> {
+        const pattern = { cmd: 'employer-delete' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
     @Get('/applicant/get')
     getApplicant(@Req() req): Observable<any> {
         const pattern = { cmd: 'applicant-get' };
@@ -54,6 +75,19 @@ export class ApiController {
         return this.client.send<any>(pattern, payload);
     }
 
+    @Get('/jobsPosted')
+    jobsPosted(@Req() req): Observable<any> {
+        const pattern = { cmd: 'jobsPosted' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
+    @Get('/jobApplicants')
+    jobApplicants(@Req() req): Observable<any> {
+        const pattern = { cmd: 'jobApplicants' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
 
     @Get('/friend-requests')
     friendRequests(@Req() req): Observable<any> {
@@ -68,10 +102,29 @@ export class ApiController {
         const payload = req.query;
         return this.client.send<any>(pattern, payload);
     }
+    @Get('/profile')
+    profile(@Req() req): Observable<any> {
+        const pattern = { cmd: 'profile' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
 
     @Get('/my-network')
     myNetwork(@Req() req): Observable<any> {
         const pattern = { cmd: 'my-network' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
+    @Get('/network-connect')
+    networkConnect(@Req() req): Observable<any> {
+        const pattern = { cmd: 'network-connect' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+    @Get('/handle-friend-requests')
+    handleFriendRequests(@Req() req): Observable<any> {
+        const pattern = { cmd: 'handle-friend-requests' };
         const payload = req.query;
         return this.client.send<any>(pattern, payload);
     }

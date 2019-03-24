@@ -23,7 +23,6 @@ export class NetworkService {
 
   async getUsers(payload) {
     const result = await this.networkModel.findOne({ uid: payload.uid })
-
     const uids = []
     if (result) {
       for (var i = 0; i < result.network.length; i++) {
@@ -62,7 +61,7 @@ export class NetworkService {
         }
       }
     ]
-    const network = this.userModel.aggregate(aggregate)
+    const network = await this.userModel.aggregate(aggregate)
     return network[0]
 
   }
@@ -212,9 +211,7 @@ export class NetworkService {
     const user = await this.userModel.findOne({ _id: payload.uid })
     // console.log('user.type', user)
     if (modelMap.hasOwnProperty(user.type)) {
-      modelMap[user.type].findOne({ uid: user._id }, (err, data) => {
-        return data
-      })
+      return await modelMap[user.type].findOne({ uid: user._id })
     } else {
       return 'something went wrong'
     }

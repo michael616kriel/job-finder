@@ -1,0 +1,12 @@
+.friend-dropdown {
+    transform: translateX(-75%);
+    padding: 0;
+    width: 500px;
+    & .friend-request{
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        padding: 15px 15px;
+        & .btn-group {
+            padding-top: 10px;
+        }
+    }
+}

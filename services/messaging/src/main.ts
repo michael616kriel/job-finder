@@ -1,13 +1,11 @@
 
 import { NestFactory } from '@nestjs/core';
-import { Transport } from '@nestjs/microservices';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.TCP,
-  });
-  app.listen(() => console.log('Microservice is listening'));
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  await app.listen(5000);
 }
 
 bootstrap();

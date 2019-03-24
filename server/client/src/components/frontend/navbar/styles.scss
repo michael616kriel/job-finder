@@ -1,0 +1,13 @@
+.site-nav{
+  // margin-bottom: 60px;
+  padding: 0;
+  & .nav-link {
+      display: block;
+      padding: 2rem 1.5rem;
+  }
+  & .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+

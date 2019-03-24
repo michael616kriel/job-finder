@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { JobService } from './job.service';
 import { ApplicantService } from './applicant.service';
 import { NetworkService } from './network.service';
+import { EmployerService } from './employer.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import ApplicantSchema from './schemas/Applicant.schema'
@@ -22,6 +23,6 @@ import EmployerSchema from './schemas/Employer.schema'
     MongooseModule.forFeature([{ name: 'Employer', schema: EmployerSchema }])
   ],
   controllers: [AppController],
-  providers: [JobService, ApplicantService, NetworkService],
+  providers: [JobService, ApplicantService, NetworkService, EmployerService],
 })
 export class AppModule { }

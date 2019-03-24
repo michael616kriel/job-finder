@@ -23,7 +23,7 @@ export class AppService {
 
   async login(payload: Login): Promise<any> {
 
-    const user = await this.userModel.find({}).exec()
+    const user = await this.userModel.find({ username: payload.username }).exec()
 
     console.log(user)
 
