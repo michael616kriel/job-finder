@@ -23,13 +23,11 @@ export class AppService {
 
   async login(payload: Login): Promise<any> {
 
-    const user = await this.userModel.find({
-      username: payload.username
-    }).exec()
+    const user = await this.userModel.find({}).exec()
 
     console.log(user)
 
-    if (!user) {
+    if (!user[0]) {
       return { message: 'Something is not right' }
     }
     // req.login(user, { session: false }, (err) => {
@@ -82,13 +80,13 @@ export class AppService {
     try {
       const decoded = await jwt.verify(payload.token, this.secret);
       const user = await this.userModel.findOne({ _id: decoded.uid, username: decoded.username })
-      if (user[0]) {
+      if (user) {
 
         // console.log('user found', {
         //     uid: user._id,
         //     username: user.username,
         // })
-        let userData = user[0]
+        let userData = user
         let data = {
           authenticated: true,
           user: {

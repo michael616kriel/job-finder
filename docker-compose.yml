@@ -28,15 +28,6 @@ services:
     networks:
       - services_network
       - db_network
-  networking:
-    build: ./services/networking
-    ports:
-      - "8084:3000"
-    depends_on:
-      - mongo
-    networks:
-      - services_network
-      - db_network
   api:
     build: ./services/api
     ports:

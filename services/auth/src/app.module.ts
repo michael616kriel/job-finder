@@ -9,7 +9,7 @@ import ApplicantSchema from './schemas/Applicant.schema'
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/jobList'),
+    MongooseModule.forRoot('mongodb://localhost/joblist'),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     MongooseModule.forFeature([{ name: 'Employer', schema: EmployerSchema }]),
     MongooseModule.forFeature([{ name: 'Applicant', schema: ApplicantSchema }])

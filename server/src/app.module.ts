@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { AuthController } from './controllers/auth.controller';
+import { ApiController } from './controllers/api.controller';
 // import { MessagingController } from './controllers/messaging.controller';
 // import { NetworkController } from './controllers/networking.controller';
 import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservices';
@@ -13,6 +14,13 @@ import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservi
         transport: Transport.TCP,
         options: {
           port: 6000
+        }
+      },
+      {
+        name: 'API_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          port: 6001
         }
       },
       // {
@@ -36,6 +44,7 @@ import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservi
   controllers: [
     AppController,
     AuthController,
+    ApiController
     // MessagingController,
     // NetworkController
   ],

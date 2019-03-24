@@ -9,6 +9,7 @@ export class AppController {
 
   @MessagePattern({ cmd: 'login' })
   async login(payload: any): Promise<any> {
+    console.log(payload)
     return await this.appService.login(payload)
   }
 
