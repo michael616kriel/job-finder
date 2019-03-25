@@ -56,9 +56,25 @@ export class AppController {
     return await this.jobService.getOne(payload);
   }
 
+
   @MessagePattern({ cmd: 'jobsApplied' })
   async jobsApplied(payload: any): Promise<any> {
     return await this.jobService.getUserAppliedJobs(payload);
+  }
+
+  @MessagePattern({ cmd: 'jobCreate' })
+  async jobCreate(payload: any): Promise<any> {
+    return await this.jobService.create(payload);
+  }
+
+  @MessagePattern({ cmd: 'jobUpdate' })
+  async jobUpdate(payload: any): Promise<any> {
+    return await this.jobService.update(payload);
+  }
+
+  @MessagePattern({ cmd: 'JobApply' })
+  async JobApply(payload: any): Promise<any> {
+    return await this.jobService.apply(payload);
   }
 
   @MessagePattern({ cmd: 'jobsPosted' })

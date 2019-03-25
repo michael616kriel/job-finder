@@ -95,12 +95,35 @@ export class ApiController {
         return this.client.send<any>(pattern, payload);
     }
 
+    @Get('/jobCreate')
+    jobCreate(@Req() req): Observable<any> {
+        const pattern = { cmd: 'jobCreate' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
+    @Get('/jobUpdate')
+    jobUpdate(@Req() req): Observable<any> {
+        const pattern = { cmd: 'jobUpdate' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
     @Get('/jobsPosted')
     jobsPosted(@Req() req): Observable<any> {
         const pattern = { cmd: 'jobsPosted' };
         const payload = req.query;
         return this.client.send<any>(pattern, payload);
     }
+
+    @Get('/JobApply')
+    JobApply(@Req() req): Observable<any> {
+        const pattern = { cmd: 'JobApply' };
+        const payload = req.query;
+        return this.client.send<any>(pattern, payload);
+    }
+
+
 
     @Get('/jobApplicants')
     jobApplicants(@Req() req): Observable<any> {

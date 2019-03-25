@@ -62,10 +62,17 @@ export class AppService {
       const user = await createdUser.save()
 
       if (!user) return console.error(user)
-      var newApplicant = scope.applicantModel({ uid: user._id })
-      const applicant = newApplicant.save()
 
-      if (!applicant) return console.error(applicant)
+      if (user.type === 'employer') {
+        var newEmployer = scope.employerModel({ uid: user._id })
+        const employer = newEmployer.save()
+        if (!employer) return console.error(employer)
+      } else {
+        var newApplicant = scope.applicantModel({ uid: user._id })
+        const applicant = newApplicant.save()
+        if (!applicant) return console.error(applicant)
+      }
+
       return 'signed up'
 
     } else {

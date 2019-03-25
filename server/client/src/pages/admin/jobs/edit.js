@@ -60,8 +60,11 @@ class EditJobs extends Component {
         try {
             const dataClone = Object.assign(this.state.job, {})
             dataClone.owner_uid = this.context.user.uid
-            const response = await axios.get(`${Config.apiUrl}/job/update/${this.props.match.params.id}`, {
-                params: dataClone,
+            const response = await axios.get(`${Config.apiUrl}/jobUpdate/`, {
+                params: {
+                    data: dataClone,
+                    id: this.props.match.params.id
+                },
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('authToken'),
                 },

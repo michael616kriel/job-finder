@@ -6,7 +6,8 @@ services:
       - "8080:3005"
     depends_on:
       - auth
-      - messaging
+      - api
+      - storage
     networks:
       - services_network
   auth:
@@ -38,7 +39,7 @@ services:
     ports:
       - "6001:6001"
     depends_on:
-      - mongo
+      - mongo 
     networks:
       - services_network
       - db_network

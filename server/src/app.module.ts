@@ -11,6 +11,7 @@ import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservi
         name: 'AUTH_SERVICE',
         transport: Transport.TCP,
         options: {
+          host: 'auth',
           port: 6000
         }
       },
@@ -18,6 +19,7 @@ import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservi
         name: 'API_SERVICE',
         transport: Transport.TCP,
         options: {
+          host: 'api',
           port: 6001
         }
       },
@@ -32,15 +34,16 @@ import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservi
         name: 'STORAGE_SERVICE',
         transport: Transport.TCP,
         options: {
+          host: 'storage',
           port: 6003
         }
       },
     ])
   ],
   controllers: [
-    AppController,
     AuthController,
-    ApiController
+    ApiController,
+    AppController
   ],
   providers: [],
 })

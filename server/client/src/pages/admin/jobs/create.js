@@ -46,7 +46,7 @@ class AdminJobs extends Component {
         try {
             const dataClone = Object.assign(this.state.job, {})
             dataClone.owner_uid = this.context.user.uid
-            const response = await axios.get(`${Config.apiUrl}/job/create`, {
+            const response = await axios.get(`${Config.apiUrl}/jobCreate`, {
                 params: dataClone,
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('authToken'),

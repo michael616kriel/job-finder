@@ -6,11 +6,6 @@ import { Observable } from 'rxjs'
 export class AuthController {
     constructor(@Inject('AUTH_SERVICE') private readonly client: ClientProxy) { }
 
-    @Get('/')
-    root(): string {
-        return 'Welcome to Auth';
-    }
-
     @Post('/auth/login')
     login(@Req() req): Observable<string> {
         const pattern = { cmd: 'login' };

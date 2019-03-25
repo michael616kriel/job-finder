@@ -9,5 +9,5 @@ RUN npm install
 # Copy app source code
 COPY . .
 #Expose port and start application
-EXPOSE 3000
+EXPOSE 6001
 CMD [ "npm", "start" ]

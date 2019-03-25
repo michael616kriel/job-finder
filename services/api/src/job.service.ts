@@ -14,6 +14,7 @@ export class JobService {
   ) { }
 
   async create(payload) {
+    console.log('create job', payload)
     const newJob = this.jobModel(payload)
     const job = await newJob.save()
     if (!job) return console.error(job)
@@ -62,7 +63,8 @@ export class JobService {
   }
 
   async update(payload) {
-    const job = await this.jobModel.update({ _id: payload.id }, payload)
+    console.log('update job', payload.data)
+    const job = await this.jobModel.findOneAndUpdate({ _id: payload.id }, JSON.parse(payload.data))
     if (!job) return console.error(job)
     return 'Job updated!'
   }

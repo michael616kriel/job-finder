@@ -7,7 +7,7 @@ import * as path from 'path'
 export class AppController {
   constructor() { }
 
-  @Get('/')
+  @Get('*')
   getHome(@Res() res): Observable<string> {
     return res.sendFile(path.join(__dirname, '/../../client/build/index.html'));
   }
