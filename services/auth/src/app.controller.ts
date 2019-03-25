@@ -7,10 +7,8 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-
   @MessagePattern({ cmd: 'login' })
   async login(payload: any): Promise<any> {
-    console.log(payload)
     return await this.appService.login(payload)
   }
 

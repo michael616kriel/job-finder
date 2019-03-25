@@ -6,9 +6,11 @@ import { EventsGateway } from './events/events.gateway'
 
 import ChatSchema from './schemas/Chat.schema'
 
+const DB_HOST = process.env.DB_HOST || 'localhost';
+
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/joblist'),
+    MongooseModule.forRoot(`mongodb://${DB_HOST}/joblist`),
     MongooseModule.forFeature([{ name: 'Chat', schema: ChatSchema }]),
   ],
   controllers: [AppController],

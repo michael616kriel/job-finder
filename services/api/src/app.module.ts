@@ -12,9 +12,13 @@ import UserSchema from './schemas/User.schema'
 import NetworkSchema from './schemas/Network.schema'
 import FriendRequestSchema from './schemas/FriendRequest.schema'
 import EmployerSchema from './schemas/Employer.schema'
+
+
+const DB_HOST = process.env.DB_HOST || 'localhost';
+
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/joblist', { useNewUrlParser: true }),
+    MongooseModule.forRoot(`mongodb://${DB_HOST}/joblist`, { useNewUrlParser: true }),
     MongooseModule.forFeature([{ name: 'Job', schema: JobSchema }]),
     MongooseModule.forFeature([{ name: 'Applicant', schema: ApplicantSchema }]),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),

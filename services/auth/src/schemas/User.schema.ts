@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as mBcrypt from 'mongoose-bcrypt'
 
 const UserSchema = new mongoose.Schema({
     username: String,
@@ -11,6 +12,7 @@ const UserSchema = new mongoose.Schema({
     uid: String,
 })
 
+UserSchema.plugin(mBcrypt);
 UserSchema.pre('save', function (next, doc) {
     this.uid = this._id
     next()

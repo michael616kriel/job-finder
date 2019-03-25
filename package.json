@@ -17,6 +17,7 @@
     "start-storage": "cd services/storage && npm run start:dev",
     "start-api": "cd services/api && npm run start:dev",
     "start-messaging": "cd services/messaging && npm run start:dev",
+    "start-notification": "cd services/notification && npm run start:dev",
     "start": "concurrently \"npm:start-*\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

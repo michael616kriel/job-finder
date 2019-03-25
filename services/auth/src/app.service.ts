@@ -25,26 +25,27 @@ export class AppService {
 
     const user = await this.userModel.findOne({ username: { $eq: payload.username } }).exec()
 
-    console.log(user)
-
     if (!user) {
-      return { message: 'Something is not right' }
+      return { message: 'unauthorized' }
     }
-    // req.login(user, { session: false }, (err) => {
-    //   if (err) {
-    //     res.send(err)
-    //   }
-    let userData = user
-    const userObject = {
-      username: userData.username,
-      uid: userData._id,
-      type: userData.type,
-      roles: [userData.type],
+
+    const valid = await user.verifyPassword(payload.password)
+    console.log('valid', valid)
+
+    if (valid) {
+      let userData = user
+      const userObject = {
+        username: userData.username,
+        uid: userData._id,
+        type: userData.type,
+        roles: [userData.type],
+      }
+      // generate a signed json web token with the contents of user object and return it in the response
+      const token = jwt.sign(userObject, this.secret)
+      return { userObject, token }
+    } else {
+      return { message: 'unauthorized' }
     }
-    // generate a signed json web token with the contents of user object and return it in the response
-    const token = jwt.sign(userObject, this.secret)
-    return { userObject, token }
-    // })
 
   }
 
@@ -70,7 +71,6 @@ export class AppService {
     } else {
       return 'user exists'
     }
-
   }
 
   async checkToken(payload: any): Promise<any> {
@@ -81,11 +81,6 @@ export class AppService {
       const decoded = await jwt.verify(payload.token, this.secret);
       const user = await this.userModel.findOne({ _id: decoded.uid, username: decoded.username })
       if (user) {
-
-        // console.log('user found', {
-        //     uid: user._id,
-        //     username: user.username,
-        // })
         let userData = user
         let data = {
           authenticated: true,
@@ -98,12 +93,11 @@ export class AppService {
         }
         return data
       } else {
-        // console.log('user not found', decoded)
         return { authenticated: false, user: null }
       }
     } catch (e) {
       return false
     }
-
   }
+
 }

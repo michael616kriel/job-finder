@@ -21,13 +21,13 @@ import { ClientsModule, Transport, ClientProxyFactory } from '@nestjs/microservi
           port: 6001
         }
       },
-      {
-        name: 'NOTIFICATION_SERVICE',
-        transport: Transport.TCP,
-        options: {
-          port: 6002
-        }
-      },
+      // {
+      //   name: 'NOTIFICATION_SERVICE',
+      //   transport: Transport.TCP,
+      //   options: {
+      //     port: 6002
+      //   }
+      // },
       {
         name: 'STORAGE_SERVICE',
         transport: Transport.TCP,

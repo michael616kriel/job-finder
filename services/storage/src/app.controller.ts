@@ -8,12 +8,12 @@ export class AppController {
   constructor(private readonly appService: AppService) { }
 
   @MessagePattern({ cmd: 'upload-profile' })
-  uploadProfile(payload: any): string {
+  uploadProfile(payload: any): Promise<string> {
     return this.appService.uploadProfile(payload);
   }
 
   @MessagePattern({ cmd: 'upload-banner' })
-  uploadBanner(payload: any): string {
+  uploadBanner(payload: any): Promise<string> {
     return this.appService.uploadBanner(payload);
   }
 

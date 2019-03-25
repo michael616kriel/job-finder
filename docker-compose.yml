@@ -11,6 +11,8 @@ services:
       - services_network
   auth:
     build: ./services/auth
+    environment:
+      - DB_HOST=mongo
     ports:
       - "6000:6000"
     depends_on:
@@ -20,6 +22,8 @@ services:
       - db_network
   messaging:
     build: ./services/messaging
+    environment:
+      - DB_HOST=mongo
     ports:
       - "5000:5000"
     depends_on:
@@ -29,6 +33,8 @@ services:
       - db_network
   api:
     build: ./services/api
+    environment:
+      - DB_HOST=mongo
     ports:
       - "6001:6001"
     depends_on:
@@ -38,6 +44,8 @@ services:
       - db_network
   notification:
     build: ./services/notification
+    environment:
+      - DB_HOST=mongo
     ports:
       - "6002:6002"
     depends_on:
@@ -47,6 +55,8 @@ services:
       - db_network
   storage:
     build: ./services/storage
+    environment:
+      - DB_HOST=mongo
     ports:
       - "6003:6003"
     depends_on:
