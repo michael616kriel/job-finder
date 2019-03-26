@@ -11,7 +11,6 @@ class BaseRoute extends Component {
   }
 
   props: any
-
   constructor(props: any) {
     super(props)
 

@@ -51,69 +51,69 @@ class App extends Component {
             <Provider value={this.appState}>
                 <Router>
                     <Switch>
-                        <BaseRoute path="/" component={Home} />
-                        <BaseRoute path="/new" component={NewLayout} />
+                        <BaseRoute exact path="/" component={Home} />
+                        <BaseRoute exact path="/new" component={NewLayout} />
 
                         {/*  render so history prop can be passed to child components */}
-                        <Route path="/login" render={(props) => <BaseRoute {...props} component={Login} />} />
-                        <Route path="/signup" render={(props) => <BaseRoute {...props} component={Signup} />} />
+                        <Route exact path="/login" render={(props) => <BaseRoute {...props} component={Login} />} />
+                        <Route exact path="/signup" render={(props) => <BaseRoute {...props} component={Signup} />} />
 
-                        <BaseRoute path="/jobs" component={Jobs} />
-                        <BaseRoute path="/job/:id" component={JobView} />
+                        <BaseRoute exact path="/jobs" component={Jobs} />
+                        <BaseRoute exact path="/job/:id" component={JobView} />
 
                         <Route
-
+                            exact
                             path="/admin/dashboard"
                             render={(props) => <BaseRoute {...props} component={Dashboard} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
                         <Route
-
+                            exact
                             path="/admin/networking"
                             render={(props) => <BaseRoute {...props} component={Networking} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
                         <Route
-
+                            exact
                             path="/admin/messages"
                             render={(props) => <BaseRoute {...props} component={Messages} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
                         <Route
-
+                            exact
                             path="/admin/settings"
                             render={(props) => <BaseRoute {...props} component={Settings} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
 
                         <Route
-
+                            exact
                             path="/admin/jobs"
                             render={(props) => <BaseRoute {...props} component={AllJobs} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
                         <Route
-
+                            exact
                             path="/admin/new-job"
                             render={(props) => <BaseRoute {...props} component={CreateJobs} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
                         <Route
-
+                            exact
                             path="/admin/edit-job/:id"
                             render={(props) => <BaseRoute {...props} component={EditJobs} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
 
                         <Route
-
+                            exact
                             path="/admin/applicant/jobs"
                             render={(props) => <BaseRoute {...props} component={ApplicantJobs} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
 
                         <Route
-
+                            exact
                             path="/admin/job/applicants/:id"
                             render={(props) => <BaseRoute {...props} component={JobApplicant} protected={true}
                                 roles={this.roles.ADMIN} />}
@@ -121,28 +121,28 @@ class App extends Component {
 
 
                         <Route
-
+                            exact
                             path="/admin/profiles/employer"
                             render={(props) => <BaseRoute {...props} component={EmployerProfile} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
 
                         <Route
-
+                            exact
                             path="/admin/profiles/applicant"
                             render={(props) => <BaseRoute {...props} component={ApplicantProfile} protected={true}
                                 roles={this.roles.ADMIN} />}
                         />
 
                         <Route
-
+                            exact
                             path="/admin/profile/applicant/:id"
                             render={(props) => <BaseRoute {...props} component={ApplicantProfileView} protected={true}
                                 roles={this.roles.ALL} />}
                         />
 
                         <Route
-
+                            exact
                             path="/admin/profile/employer/:id"
                             render={(props) => <BaseRoute {...props} component={EmployerProfileView} protected={true}
                                 roles={this.roles.ALL} />}
